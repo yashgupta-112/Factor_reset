@@ -1,4 +1,1 @@
-print("yash \n")
-print("gupta \n")
-print("gupta \n")
-print("gupta \n")
+print ('yes boss"{}"'.format("yash"))

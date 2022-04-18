@@ -37,6 +37,7 @@ class FactorReset():
 
     def Remove_Extra_directory(self,path):
         main_dir = []
+        second_round = []
         remove_dir = ['media','files','downloads','.bashrc', '.bash_history', 'watch', '.wget-hsts', '.config',
                       'factor_reset.py','.profile', '.python_history', 'www', 'bin', '.bash_logout', 
                       '.nano', '.apps', '.rtorrent.rc',".viminfo",'.ssh'] #these directories will not get removed
@@ -47,6 +48,12 @@ class FactorReset():
         print("Removing Extra directories#########")
         for i in final_dir:
             os.system("rm -rf {}".format(i))
+        listed_dir = os.listdir(path)
+        for lis in listed_dir:
+            second_round.append(lis)
+        second_round_dir = list(set(second_round).difference(remove_dir))
+        for i in second_round_dir:
+            os.system("rm -rf '{}'".format(i))
         print("All extra directories and files has been deleted moving forward")
     
     def uninstall_apps_directory(self,path):
