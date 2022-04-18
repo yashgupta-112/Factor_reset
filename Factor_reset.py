@@ -96,7 +96,7 @@ reset = FactorReset()
 if __name__ == '__main__':
     s = input("Are you sure you want to delete all your data and applications config ? (yes/no)")
     if s == "yes":
-        print("Choose the option from the list below.","1. Complete reset delete all data and config","2. Delete all extra folders and files","3. Uninstall all applications and their config but don't delete data" ,"4. Delete data from main directories(files,media)", sep =os.linesep )
+        print("Choose the option from the list below.","1. Complete reset delete all data and config","2. Delete all extra folders and files","3. Uninstall all applications and their config but don't delete data" ,"4. Delete data from main directories: files,media,download", sep = os.linesep )
         choice = input("Please enter your choice: ")
         if choice == "1":
             reset.Remove_Extra_directory(path)
