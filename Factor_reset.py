@@ -61,6 +61,8 @@ class FactorReset():
         all_apps = os.listdir(path)
         delete_apps = list(set(all_apps).difference(remove_apps))
         for i in delete_apps:
+            os.system('rm -rf {}'.format(i))
+        for i in delete_apps:
             print("Uninstallation of {} has been started.....".format(i))
             os.system("app-{} uninstall ".format(i))
             print("{} succesfully uninstalled".format(i))
@@ -114,14 +116,20 @@ if __name__ == '__main__':
             reset.uninstall_apps_directory(apps_path)
             reset.delete_config(config_path)
             reset.delete_Data_from_maindirectory(Movie_path,tv_path,music_path,book_path)
+            os.system("app-nginx uninstall && app-nginx install && app-nginx restart")
             os.system("clear")
         if choice == "3":
             reset.uninstall_apps_directory(apps_path)
             reset.delete_config(config_path)
+            os.system("app-nginx uninstall && app-nginx install && app-nginx restart")
             os.system("clear")
         if choice == "2":
             reset.Remove_Extra_directory(path)
+            os.system("app-nginx uninstall && app-nginx install && app-nginx restart")
+            os.system("clear")
         if choice == "4":
             reset.delete_Data_from_maindirectory(Movie_path,tv_path,music_path,book_path)
+            os.system("app-nginx uninstall && app-nginx install && app-nginx restart")
+            os.system("clear")
     else:
         print("Factor Reset has been stopped.... All your data is safe")
