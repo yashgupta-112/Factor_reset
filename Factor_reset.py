@@ -103,6 +103,7 @@ class FactorReset():
 reset = FactorReset()
 
 if __name__ == '__main__':
+    print("\033[91m"+ "Disclaimer: This script is unofficial and USB staff will not support any issues with it" + "\033[0m")
     s = input("Are you sure you want to delete all your data and applications config ? (yes/no)")
     if s == "yes":
         print("Choose the option from the list below.\n")
