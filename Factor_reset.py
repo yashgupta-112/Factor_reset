@@ -61,7 +61,7 @@ class FactorReset():
         all_apps = os.listdir(path)
         delete_apps = list(set(all_apps).difference(remove_apps))
         for i in delete_apps:
-            os.system('rm -rf {}'.format(i))
+            os.system("rm -rf"+ " " + apps_path + "/" + i)
         for i in delete_apps:
             print("Uninstallation of {} has been started.....".format(i))
             os.system("app-{} uninstall ".format(i))
