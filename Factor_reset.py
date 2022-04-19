@@ -97,6 +97,10 @@ class FactorReset():
         print("Files directory cleanup started..")
         os.system("rm -rf {}".format(files_path + "/*"))
         print("Files directory cleanup done")
+    def Finalfix(self):
+        os.system("app-nginx uninstall && app-nginx install && app-nginx restart")
+        os.system("clear")
+        
     
 
 
@@ -117,20 +121,18 @@ if __name__ == '__main__':
             reset.uninstall_apps_directory(apps_path)
             reset.delete_config(config_path)
             reset.delete_Data_from_maindirectory(Movie_path,tv_path,music_path,book_path)
-            os.system("app-nginx uninstall && app-nginx install && app-nginx restart")
-            os.system("clear")
+            reset.unmount_rclone()
+            reset.Finalfix()
+            
         if choice == "3":
             reset.uninstall_apps_directory(apps_path)
             reset.delete_config(config_path)
-            os.system("app-nginx uninstall && app-nginx install && app-nginx restart")
-            os.system("clear")
+            reset.Finalfix()
         if choice == "2":
             reset.Remove_Extra_directory(path)
-            os.system("app-nginx uninstall && app-nginx install && app-nginx restart")
-            os.system("clear")
+            reset.Finalfix()
         if choice == "4":
             reset.delete_Data_from_maindirectory(Movie_path,tv_path,music_path,book_path)
-            os.system("app-nginx uninstall && app-nginx install && app-nginx restart")
-            os.system("clear")
+            reset.Finalfix()
     else:
         print("Factor Reset has been stopped.... All your data is safe")
