@@ -77,6 +77,8 @@ class FactorReset():
         os.system("app-transmission uninstall")
         os.system("app-qbittorrent uninstall")
         os.system("rm -rf .ssh/authorized_keys")
+        os.system("rm -rf www/rutorrent")
+        os.system("rm -rf .apps/backup/*")
         for i in delete_config:
             os.system("rm -rf"+ " " + config_path + "/" + i)
         print("All torrent clients has been uninstalled and config files has been deleted")
