@@ -13,6 +13,9 @@ music_path = path + '/media/Music'
 Movie_path = path + '/media/Movies'
 tv_path = path + '/media/"TV Shows"'
 book_path = path + '/media/Books'
+backup_path = path + '/.apps/backup/*'
+rutorrent_plugin = path + '/www/rutorrent'
+
 
 """
 clean up class
@@ -78,7 +81,8 @@ class FactorReset():
         os.system("app-qbittorrent uninstall")
         os.system("rm -rf .ssh/authorized_keys")
         os.system("rm -rf www/rutorrent")
-        os.system("rm -rf .apps/backup/*")
+        os.system("rm -rf {}".format(backup_path))
+        os.system("rm -rf {}".format(rutorrent_plugin))
         for i in delete_config:
             os.system("rm -rf"+ " " + config_path + "/" + i)
         print("All torrent clients has been uninstalled and config files has been deleted")
