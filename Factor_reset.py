@@ -11,7 +11,7 @@ files_path = path + '/files'
 downloads_path = path + '/downloads'
 music_path = path + '/media/Music'
 Movie_path = path + '/media/Movies'
-tv_path = path + '/media/TV Shows'
+tv_path = path + '/media/"TV Shows"'
 book_path = path + '/media/Books'
 
 """
@@ -96,6 +96,8 @@ class FactorReset():
         print("media/Books directory cleanup done")
         print("Files directory cleanup started..")
         os.system("rm -rf {}".format(files_path + "/*"))
+        print("Files directory cleanup started..")
+        os.system("rm -rf {}".format(downloads_path + "/*"))
         print("Files directory cleanup done")
     def Finalfix(self):
         os.system("app-nginx uninstall && app-nginx install && app-nginx restart")
