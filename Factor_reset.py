@@ -15,6 +15,7 @@ tv_path = path + '/media/"TV Shows"'
 book_path = path + '/media/Books'
 backup_path = path + '/.apps/backup/*'
 rutorrent_plugin = path + '/www/rutorrent'
+bin_path = path + '/bin'
 
 
 """
@@ -81,13 +82,13 @@ class FactorReset():
         os.system("app-qbittorrent uninstall")
         os.system("rm -rf .ssh/authorized_keys")
         os.system("rm -rf www/rutorrent")
-        os.system("rm -rf {}".format(backup_path))
+        #os.system("rm -rf {}".format(backup_path))
         os.system("rm -rf {}".format(rutorrent_plugin))
         for i in delete_config:
             os.system("rm -rf"+ " " + config_path + "/" + i)
         print("All torrent clients has been uninstalled and config files has been deleted")
 
-    def delete_Data_from_maindirectory(self,path1,path2,path3,path4):
+    def delete_Data_from_maindirectory(self,path1,path2,path3,path4,files_path,downloads_path):
         print("media/Movie directory cleanup started..")
         os.system("rm -rf {}".format(path1 + "/*"))
         print("media/Movie directory cleanup done..")
@@ -105,19 +106,27 @@ class FactorReset():
         print("Files directory cleanup started..")
         os.system("rm -rf {}".format(downloads_path + "/*"))
         print("Files directory cleanup done")
+    
+    def ClearBin(self, files_path):
+        avoid = ['nginx']
+        all_bin_dir = os.listdir(files_path)
+        delete_bin_dir = list(set(all_bin_dir).difference(avoid))
+        for i in delete_bin_dir:
+             os.system("rm -rf"+ " " + files_path + "/" + i)
+    
     def Finalfix(self):
         os.system("app-nginx uninstall && app-nginx install && app-nginx restart")
         os.system("clear")
+    
         
     
-
-
 reset = FactorReset()
 
 if __name__ == '__main__':
     print("\033[91m"+ "Disclaimer: This script is unofficial and USB staff will not support any issues with it" + "\033[0m")
     s = input("Are you sure you want to delete all your data and applications config ? (yes/no)")
-    if s == "yes":
+    confirmation = input("Please type 'confirm' to run the script:")
+    if s == "yes" or s == "Yes" or s =="YES" and confirmation == "confirm":
         print("Choose the option from the list below.\n")
         print("1. Complete reset delete all data and config. \n")
         print("2. Delete all extra folders and files. \n")
@@ -128,19 +137,23 @@ if __name__ == '__main__':
             reset.Remove_Extra_directory(path)
             reset.uninstall_apps_directory(apps_path)
             reset.delete_config(config_path)
-            reset.delete_Data_from_maindirectory(Movie_path,tv_path,music_path,book_path)
+            reset.delete_Data_from_maindirectory(Movie_path,tv_path,music_path,book_path,files_path,downloads_path)
             reset.unmount_rclone()
+            reset.ClearBin(bin_path)
             reset.Finalfix()
             
         if choice == "3":
             reset.uninstall_apps_directory(apps_path)
             reset.delete_config(config_path)
+            reset.ClearBin(bin_path)
             reset.Finalfix()
         if choice == "2":
             reset.Remove_Extra_directory(path)
             reset.Finalfix()
         if choice == "4":
-            reset.delete_Data_from_maindirectory(Movie_path,tv_path,music_path,book_path)
+            reset.delete_Data_from_maindirectory(Movie_path,tv_path,music_path,book_path,files_path,downloads_path)
             reset.Finalfix()
-    else:
+    elif s == "no" or s == "NO" or s == "No":
         print("Factor Reset has been stopped.... All your data is safe")
+    else :
+        print("Please run the script again and choose valid option.")
