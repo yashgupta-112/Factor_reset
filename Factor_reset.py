@@ -1,5 +1,5 @@
-os.system("pip3 install tqdm")
 import os
+os.system("pip3 install tqdm")
 import tqdm 
 from time import sleep
 """
