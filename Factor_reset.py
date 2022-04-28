@@ -1,3 +1,4 @@
+os.system("pip3 install tqdm")
 import os
 import tqdm 
 from time import sleep
