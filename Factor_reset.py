@@ -1,7 +1,5 @@
 import os
-os.system("pip3 install tqdm")
-import tqdm 
-from time import sleep
+
 """
 Path definded for the directories
 """
@@ -69,7 +67,7 @@ class FactorReset():
         for i in delete_apps:
             os.system("rm -rf"+ " " + apps_path + "/" + i)
         for i in delete_apps:
-            #print("Uninstallation of {} has been started.....".format(i))
+            print("Uninstallation of {} has been started.....".format(i))
             os.system("app-{} uninstall ".format(i))
             print("{} succesfully uninstalled".format(i))
     
@@ -91,23 +89,23 @@ class FactorReset():
         print("All torrent clients has been uninstalled and config files has been deleted")
 
     def delete_Data_from_maindirectory(self,path1,path2,path3,path4,files_path,downloads_path):
-        print("Main directory cleanup started..")
+        print("media/Movie directory cleanup started..")
         os.system("rm -rf {}".format(path1 + "/*"))
-        #print("media/Movie directory cleanup done..")
-        #print("media/Tv Show directory cleanup started..")
+        print("media/Movie directory cleanup done..")
+        print("media/Tv Show directory cleanup started..")
         os.system("rm -rf {}".format(path2 + "/*"))
-        #print("media/Tv Show directory cleanup done..")
-        #print("media/Music directory cleanup started..")
+        print("media/Tv Show directory cleanup done..")
+        print("media/Music directory cleanup started..")
         os.system("rm -rf {}".format(path3 + "/*"))
-        #print("media/Music directory cleanup done")
-        #print("media/Books directory cleanup started..")
+        print("media/Music directory cleanup done")
+        print("media/Books directory cleanup started..")
         os.system("rm -rf {}".format(path4 + "/*"))
-        #print("media/Books directory cleanup done")
-        #print("Files directory cleanup started..")
+        print("media/Books directory cleanup done")
+        print("Files directory cleanup started..")
         os.system("rm -rf {}".format(files_path + "/*"))
-        #print("Files directory cleanup started..")
+        print("Files directory cleanup started..")
         os.system("rm -rf {}".format(downloads_path + "/*"))
-        #print("Files directory cleanup done")
+        print("Files directory cleanup done")
     
     def ClearBin(self, files_path):
         avoid = ['nginx']
@@ -125,8 +123,6 @@ class FactorReset():
 reset = FactorReset()
 
 if __name__ == '__main__':
-    os.system("pip3 install tqdm")
-    pbar = tqdm(range(100))
     print("\033[91m"+ "Disclaimer: This script is unofficial and USB staff will not support any issues with it" + "\033[0m")
     s = input("Are you sure you want to delete all your data and applications config ? (yes/no)")
     confirmation = input("Please type 'confirm' to run the script:")
@@ -138,66 +134,25 @@ if __name__ == '__main__':
         print("4. Delete data from default directories. \n")
         choice = input("Please enter your choice: ")
         if choice == "1":
-            os.system("pip3 install tqdm")
-            os.system("clear")
-            pbar.update(0)
-            sleep(0.2)
             reset.Remove_Extra_directory(path)
-            pbar.update(25)
-            sleep(0.2)
             reset.uninstall_apps_directory(apps_path)
-            pbar.update(50)
-            sleep(0.2)
             reset.delete_config(config_path)
-            pbar.update(75)
-            sleep(0.2)
             reset.delete_Data_from_maindirectory(Movie_path,tv_path,music_path,book_path,files_path,downloads_path)
-            pbar.update(95)
-            sleep(0.2)
             reset.unmount_rclone()
             reset.ClearBin(bin_path)
-            pbar.update(100)
-            sleep(0.2)
-            os.system("pip3 tqdm uninstall")
             reset.Finalfix()
             
         if choice == "3":
-            pbar.update(0)
-            sleep(0.2)
             reset.uninstall_apps_directory(apps_path)
-            pbar.update(60)
-            sleep(0.2)
             reset.delete_config(config_path)
-            pbar.update(90)
-            sleep(0.2)
             reset.ClearBin(bin_path)
-            pbar.update(100)
-            sleep(0.2)
-            os.system("pip3 tqdm uninstall")
             reset.Finalfix()
-            
         if choice == "2":
-            pbar.update(0)
-            sleep(0.2)
             reset.Remove_Extra_directory(path)
-            pbar.update(50)
-            sleep(0.2)
-            pbar.update(100)
-            sleep(0.2)
-            os.system("pip3 tqdm uninstall")
             reset.Finalfix()
-            
         if choice == "4":
-            pbar.update(0)
-            sleep(0.2)
             reset.delete_Data_from_maindirectory(Movie_path,tv_path,music_path,book_path,files_path,downloads_path)
-            pbar.update(80)
-            sleep(0.2)
-            pbar.update(100)
-            sleep(0.2)
-            os.system("pip3 tqdm uninstall")
             reset.Finalfix()
-                        
         else:
             print("Choose correct option and please run the script again.. :)")
     elif s == "no" or s == "NO" or s == "No":
