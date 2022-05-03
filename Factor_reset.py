@@ -123,7 +123,7 @@ class FactorReset():
             dir_list.append(i)
         final_list = list(set(dir_list).difference(not_remove_systemd_app))
         if len(final_list) == 0:
-            Pass
+            pass
         else:
             for s in final_list:
                 os.system("systemctl --user stop {}".format(s))
