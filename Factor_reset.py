@@ -1,4 +1,3 @@
-from ast import Pass
 import os
 
 """
@@ -164,6 +163,7 @@ if __name__ == '__main__':
         if choice == "3":
             reset.uninstall_apps_directory(apps_path)
             reset.delete_config(config_path)
+            reset.Stop_Systemd_app(systemd_app)
             reset.ClearBin(bin_path)
             reset.Finalfix()
         if choice == "2":
