@@ -44,8 +44,7 @@ class FactorReset():
         main_dir = []
         second_round = []
         remove_dir = ['media','files','downloads','.bashrc', '.bash_history', 'watch', '.wget-hsts', '.config',
-                      'factor_reset.py','.profile', '.python_history', 'www', 'bin', '.bash_logout', 
-                      '.nano', '.apps', '.rtorrent.rc',".viminfo",'.ssh'] #these directories will not get removed
+                      '.profile', 'www', 'bin','.apps','.ssh'] #these directories will not get removed
         listed_dir = os.listdir(path)
         for lis in listed_dir:
             main_dir.append(lis)
@@ -77,11 +76,10 @@ class FactorReset():
         remove_config = ['systemd']
         all_configs = os.listdir(path)
         delete_config = list(set(all_configs).difference(remove_config))
-        os.system("app-rtorrent uninstall")
-        os.system("app-deluge uninstall")
-        os.system("app-transmission uninstall")
-        os.system("app-qbittorrent uninstall")
-        os.system("rm -rf .ssh/authorized_keys")
+        os.system("app-rtorrent uninstall --full-delete")
+        os.system("app-deluge uninstall --full-delete")
+        os.system("app-transmission uninstall --full-delete")
+        os.system("app-qbittorrent uninstall --full-delete")
         os.system("rm -rf www/rutorrent")
         #os.system("rm -rf {}".format(backup_path))
         os.system("rm -rf {}".format(rutorrent_plugin))
@@ -141,7 +139,7 @@ reset = FactorReset()
 
 if __name__ == '__main__':
     print("\033[91m"+ "Disclaimer: This script is unofficial and USB staff will not support any issues with it" + "\033[0m")
-    s = input("Are you sure you want to delete all your data and applications config ? (yes/no)")
+    s = input("Are you sure you want to delete all your data and applications config because once script is executed your data will be deleted forever we won't be able to get back your data ? (yes/no)")
     confirmation = input("Please type 'confirm' to run the script:")
     if s == "yes" or s == "Yes" or s =="YES" and confirmation == "confirm":
         print("Choose the option from the list below.\n")
