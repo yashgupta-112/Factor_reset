@@ -1,11 +1,11 @@
-# python3 <(wget -qO- https://raw.githubusercontent.com/yashgupta-112/Factor_reset/master/Factor_reset.py)
-
-pbar = ProgressBar().start()
-def job():
-   total_steps = 7
-    # script 1
-    pbar.update((1/7)*100)  # current step/total steps * 100
-    # script 2
-    pbar.update((2/7)*100)  # current step/total steps * 100
-    # ....
-    pbar.finish()pip in
+import os
+path = os.getcwd() #homex/username
+config_path = path + '/.config'
+systemd_app = config_path + '/systemd/user/'
+dir_list = []
+not_remove_systemd_app = ['default.target.wants', 'nginx.service']
+list_dir = os.listdir(systemd_app)
+for i in list_dir:
+   dir_list.append(i)
+final_list = list(set(dir_list).difference(not_remove_systemd_app))
+print(final_list)

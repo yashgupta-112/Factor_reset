@@ -1,3 +1,4 @@
+from ast import Pass
 import os
 
 """
@@ -16,6 +17,7 @@ book_path = path + '/media/Books'
 backup_path = path + '/.apps/backup/*'
 rutorrent_plugin = path + '/www/rutorrent'
 bin_path = path + '/bin'
+systemd_app = config_path + '/systemd/user/'
 
 
 """
@@ -114,6 +116,22 @@ class FactorReset():
         for i in delete_bin_dir:
              os.system("rm -rf"+ " " + files_path + "/" + i)
     
+    def Stop_Systemd_app(self,path):
+        dir_list = []
+        not_remove_systemd_app = ['default.target.wants', 'nginx.service']
+        list_dir = os.listdir(path)
+        for i in list_dir:
+            dir_list.append(i)
+        final_list = list(set(dir_list).difference(not_remove_systemd_app))
+        if len(final_list) == 0:
+            Pass
+        else:
+            for s in final_list:
+                os.system("systemctl --user stop {}".format(s))
+                os.system("rm -rf" + " "+ path + i)
+                print("{} service has been stopped and removed".format(s))
+        
+    
     def Finalfix(self):
         os.system("app-nginx uninstall && app-nginx install && app-nginx restart")
         os.system("clear")
@@ -140,6 +158,7 @@ if __name__ == '__main__':
             reset.delete_Data_from_maindirectory(Movie_path,tv_path,music_path,book_path,files_path,downloads_path)
             reset.unmount_rclone()
             reset.ClearBin(bin_path)
+            reset.Stop_Systemd_app(systemd_app)
             reset.Finalfix()
             
         if choice == "3":
