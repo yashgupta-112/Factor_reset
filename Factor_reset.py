@@ -43,7 +43,7 @@ class FactorReset():
     def Remove_Extra_directory(self,path):
         main_dir = []
         second_round = []
-        remove_dir = ['media','files','downloads','.bashrc', '.bash_history', 'watch', '.wget-hsts', '.config',
+        remove_dir = ['media','files','downloads','.bashrc', '.bash_history','.bash_logout', 'watch', '.wget-hsts', '.config',
                       '.profile', 'www', 'bin','.apps','.ssh'] #these directories will not get removed
         listed_dir = os.listdir(path)
         for lis in listed_dir:
