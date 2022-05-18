@@ -1,5 +1,5 @@
 import os
-
+from subprocess import check_output
 """
 Path definded for the directories
 """
@@ -127,6 +127,8 @@ class FactorReset():
                 os.system("systemctl --user stop {}".format(s))
                 os.system("rm -rf" + " "+ path + "/" + i)
                 print("{} service has been stopped and removed".format(s))
+        os.system("systemctl --user daemon-reload")
+        os.system("systemctl --user reset-failed")
         
     
     def Finalfix(self):
@@ -134,8 +136,17 @@ class FactorReset():
         os.system("clear")
         
     def Fresh_Bash_install(self):
-        pass
+        print("Deleting your old .bashrc and .profile")
+        os.system("rm -rf .bashrc")
+        os.system("rm -rf .profile")
+        os.system("cp /etc/skel/.profile ~/")
+        os.system("cp /etc/skel/.bashrc ~/")
+        check_output("source .bashrc",   shell=True,executable="/bin/bash")
+        check_output("source .profile",   shell=True,executable="/bin/bash")
+        print("Fresh .profile and .bashrc has been installed and loaded")
     
+    def clear_corntab(self):
+        os.system("crontab -r")
     
         
     
@@ -160,6 +171,8 @@ if __name__ == '__main__':
             reset.unmount_rclone()
             reset.ClearBin(bin_path)
             reset.Stop_Systemd_app(systemd_app)
+            reset.Fresh_Bash_install()
+            reset.clear_corntab()
             reset.Finalfix()
             
         if choice == "3":
@@ -167,6 +180,8 @@ if __name__ == '__main__':
             reset.delete_config(config_path)
             reset.Stop_Systemd_app(systemd_app)
             reset.ClearBin(bin_path)
+            reset.Fresh_Bash_install
+            reset.clear_corntab()
             reset.Finalfix()
         if choice == "2":
             reset.Remove_Extra_directory(path)
@@ -174,9 +189,7 @@ if __name__ == '__main__':
         if choice == "4":
             reset.delete_Data_from_maindirectory(Movie_path,tv_path,music_path,book_path,files_path,downloads_path)
             reset.Finalfix()
-        else:
-            print("Choose correct option and please run the script again.. :)")
     elif s == "no" or s == "NO" or s == "No":
-        print("Factor Reset has been stopped.... All your data is safe")
+        print("Factor Reset has been stopped,All your data is safe")
     else :
         print("Please run the script again and choose valid option.")
