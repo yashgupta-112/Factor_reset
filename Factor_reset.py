@@ -19,9 +19,7 @@ bin_path = path + '/bin'
 systemd_app = config_path + '/systemd/user/'
 
 
-"""
-clean up class
-"""
+
 
 
 class FactorReset():
