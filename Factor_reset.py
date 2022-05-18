@@ -125,13 +125,17 @@ class FactorReset():
         else:
             for s in final_list:
                 os.system("systemctl --user stop {}".format(s))
-                os.system("rm -rf" + " "+ path + i)
+                os.system("rm -rf" + " "+ path + "/" + i)
                 print("{} service has been stopped and removed".format(s))
         
     
     def Finalfix(self):
         os.system("app-nginx uninstall && app-nginx install && app-nginx restart")
         os.system("clear")
+        
+    def Fresh_Bash_install(self):
+        pass
+    
     
         
     

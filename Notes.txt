@@ -1,0 +1,7 @@
+empty crontab : crontab -r
+delete bash and profile and restore : `cp /etc/skel/.{profile,bashrc} ~/`
+`source ~/.profile`
+check bin
+
+systemctl --user daemon-reload
+systemctl --user reset-failed
