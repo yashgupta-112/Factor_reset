@@ -1,5 +1,7 @@
 import os
 from subprocess import check_output
+
+from sqlalchemy import delete
 """
 Path definded for the directories
 """
@@ -17,6 +19,7 @@ backup_path = path + '/.apps/backup/*'
 rutorrent_plugin = path + '/www/rutorrent'
 bin_path = path + '/bin'
 systemd_app = config_path + '/systemd/user/'
+media = path + '/media'
 
 
 
@@ -145,6 +148,18 @@ class FactorReset():
 
     def clear_corntab(self):
         os.system("crontab -r")
+        
+    def Delete_Custom_media_files(self,path):
+        dir_list = []
+        impt_dir =['TV Shows', 'Movies','Music','Books']
+        all_dir = os.listdir(path)
+        for i in all_dir:
+            dir_list.append(i)
+        delete_dir = list(set(dir_list).difference(impt_dir))
+        for i in delete_dir:
+            os.system("rm -rf" + " " + path + "/" + i)
+
+            
 
 
 reset = FactorReset()
@@ -161,12 +176,13 @@ if __name__ == '__main__':
         print("4. Delete data from default directories. \n")
         choice = input("Please enter your choice: ")
         if choice == "1":
+            reset.unmount_rclone()
             reset.Remove_Extra_directory(path)
             reset.uninstall_apps_directory(apps_path)
             reset.delete_config(config_path)
             reset.delete_Data_from_maindirectory(
                 Movie_path, tv_path, music_path, book_path, files_path, downloads_path)
-            reset.unmount_rclone()
+            reset.Delete_Custom_media_files(media)
             reset.ClearBin(bin_path)
             reset.Stop_Systemd_app(systemd_app)
             reset.Fresh_Bash_install()
@@ -187,6 +203,7 @@ if __name__ == '__main__':
         if choice == "4":
             reset.delete_Data_from_maindirectory(
                 Movie_path, tv_path, music_path, book_path, files_path, downloads_path)
+            reset.Delete_Custom_media_files(media)
             reset.Finalfix()
     elif s == "no" or s == "NO" or s == "No":
         print("Factor Reset has been stopped,All your data is safe")
