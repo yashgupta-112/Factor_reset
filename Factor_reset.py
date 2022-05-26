@@ -1,7 +1,8 @@
+
+#Modules import
 import os
 from subprocess import check_output
 
-from sqlalchemy import delete
 """
 Path definded for the directories
 """
@@ -20,12 +21,16 @@ rutorrent_plugin = path + '/www/rutorrent'
 bin_path = path + '/bin'
 systemd_app = config_path + '/systemd/user/'
 media = path + '/media'
-
+""""""
 
 
 
 
 class FactorReset():
+    """
+    Will unmount a single rclone mount
+    
+    """
 
     def unmount_rclone(self):
         grep_path = os.popen("mount | grep $USER").read()
@@ -42,7 +47,11 @@ class FactorReset():
             print("Rclone unmounted...")
             os.system("killall rclone")
             print("Rclone unmounted succesfully")
-
+    
+    
+    """
+    This function removes all directories except one mentioned in remove-dir array below
+    """
     def Remove_Extra_directory(self, path):
         main_dir = []
         second_round = []
@@ -62,7 +71,10 @@ class FactorReset():
         for i in second_round_dir:
             os.system("rm -rf '{}'".format(i))
         print("All extra directories and files has been deleted moving forward")
-
+    """
+    This function will uninstall all applications and clear .apps 
+    """
+    
     def uninstall_apps_directory(self, path):
         remove_apps = ['backup', 'nginx']
         all_apps = os.listdir(path)
@@ -73,7 +85,10 @@ class FactorReset():
             print("Uninstallation of {} has been started".format(i))
             os.system("app-{} uninstall ".format(i))
             print("{} succesfully uninstalled".format(i))
-
+    """
+    This function uninstall all the torrent clients and clear .config directory except imporant directories
+    
+    """
     def delete_config(self, path):
         remove_config = ['systemd']
         all_configs = os.listdir(path)
@@ -89,6 +104,10 @@ class FactorReset():
             os.system("rm -rf" + " " + config_path + "/" + i)
         print("All torrent clients has been uninstalled and config files has been deleted")
 
+    """
+    This function delete data from all pre-exisiting main directories
+    """
+    
     def delete_Data_from_maindirectory(self, path1, path2, path3, path4, files_path, downloads_path):
         print("media/Movie directory cleanup started")
         os.system("rm -rf {}".format(path1 + "/*"))
@@ -108,6 +127,10 @@ class FactorReset():
         os.system("rm -rf {}".format(downloads_path + "/*"))
         print("Files directory cleanup done")
 
+        
+    """
+    Clears Bin directory from user slot
+    """    
     def ClearBin(self, files_path):
         avoid = ['nginx']
         all_bin_dir = os.listdir(files_path)
@@ -115,6 +138,10 @@ class FactorReset():
         for i in delete_bin_dir:
             os.system("rm -rf" + " " + files_path + "/" + i)
 
+    """
+    Will stop all systemd related application or process and than will remove them except important one
+    """
+    
     def Stop_Systemd_app(self, path):
         dir_list = []
         not_remove_systemd_app = ['default.target.wants', 'nginx.service']
@@ -132,10 +159,15 @@ class FactorReset():
         os.system("systemctl --user daemon-reload")
         os.system("systemctl --user reset-failed")
 
+    """
+    Install a fresh nginx on user service
+    """
     def Finalfix(self):
         os.system("app-nginx uninstall && app-nginx install && app-nginx restart")
         os.system("clear")
-
+    """
+    Install fresh .profile and .bashrc and delete old files
+    """
     def Fresh_Bash_install(self):
         print("Deleting your old .bashrc and .profile")
         os.system("rm -rf .bashrc")
@@ -146,9 +178,15 @@ class FactorReset():
         check_output("source .profile",   shell=True, executable="/bin/bash")
         print("Fresh .profile and .bashrc has been installed and loaded")
 
+    """
+    this function clears crontab
+    """
     def clear_corntab(self):
         os.system("crontab -r")
-        
+    """
+    Delete custom directories from media directory
+    
+    """
     def Delete_Custom_media_files(self,path):
         dir_list = []
         impt_dir =['TV Shows', 'Movies','Music','Books']
